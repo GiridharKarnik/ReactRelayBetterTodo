@@ -1,0 +1,16 @@
+.taskListItem {
+    padding: 1.5px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.taskName {
+    margin: 15px;
+    flex-grow: 1;
+}
+
+.taskCheck {
+    margin: 15px;
+}

@@ -1,0 +1,23 @@
+type author {
+  id: ID!
+  name: String!
+  email: String!
+}
+
+type Mutation {
+  addTask(taskName: String!, authorId: String!): task
+  addAuthor(name: String!, email: String!): author
+}
+
+type Query {
+  tasks: [task]
+  taskById(id: String!): task
+  authors: [author]
+}
+
+type task {
+  id: ID!
+  taskName: String!
+  taskDone: Boolean!
+  authorId: String!
+}
