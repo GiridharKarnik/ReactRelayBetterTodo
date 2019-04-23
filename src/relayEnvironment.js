@@ -3,11 +3,16 @@
  * features which will be used.
  */
 import {
+    installRelayDevTools
+} from 'relay-devtools';
+import {
     Environment,
     Network,
     RecordSource,
     Store
 } from 'relay-runtime';
+
+installRelayDevTools();
 
 // the network component which relay talks to
 const network = Network.create((operation, variables) => {

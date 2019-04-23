@@ -65,7 +65,6 @@ const mutation = graphql`
   }
 `
 
-
 const updateTask = (environment, taskId, taskDone) => {
     return commitMutation(
         environment,
@@ -73,6 +72,21 @@ const updateTask = (environment, taskId, taskDone) => {
             mutation,
             variables: {
                 input: { id: taskId, taskDone }
+            },
+            //executed before the server response, update the proxyStore assuming that the API will repond with positively
+            optimisticUpdater: (proxyStore) => {
+                const task = proxyStore.get(taskId);
+                task.setValue(true, 'taskDone');
+            },
+            //executed after the actual reponse comes back from the API
+            updater: (proxyStore) => {
+                //retrieve the actual data that was returned from the API
+                const response = proxyStore.getRootField('checkTask');
+                const taskDoneResponse = response.getValue('taskDone');
+
+                //update the cache with the actual API response
+                const task = proxyStore.get(taskId);
+                task.setValue(taskDoneResponse, 'taskDone');
             },
             onCompleted: (response, errors) => {
                 if (errors) {
