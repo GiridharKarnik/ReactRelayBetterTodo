@@ -4,6 +4,7 @@ import './signUp.css';
 const React = require('react');
 
 export default class SignUp extends React.Component {
+
     render() {
         return (
             <Card className="signUpContainer">
@@ -25,7 +26,7 @@ export default class SignUp extends React.Component {
                         </Form.Group>
                         <Button variant="primary">
                             Submit
-                    </Button>
+                        </Button>
                     </Form>
             </Card>
         )

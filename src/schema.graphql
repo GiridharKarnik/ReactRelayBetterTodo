@@ -5,7 +5,11 @@ type author {
 }
 
 type Mutation {
+  """A mutation using which you can add a task to the todo list"""
   addTask(taskName: String!, authorId: String!): task
+
+  """A mutation using which you can either check or uncheck a task"""
+  checkTask(input: updateTaskStatusType!): task
   addAuthor(name: String!, email: String!): author
 }
 
@@ -15,9 +19,16 @@ type Query {
   authors: [author]
 }
 
+"""GraphQL type for the Task object"""
 type task {
   id: ID!
   taskName: String!
   taskDone: Boolean!
   authorId: String!
+}
+
+"""Input user payload for updating a task status"""
+input updateTaskStatusType {
+  id: ID!
+  taskDone: Boolean!
 }

@@ -12,7 +12,7 @@ import {
 // the network component which relay talks to
 const network = Network.create((operation, variables) => {
     return fetch(
-        'http://localhost:3000/graphql',
+        'http://localhost:8000/graphql',
         {
             method: 'POST',
             headers: {

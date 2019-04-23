@@ -10,29 +10,23 @@ import './taskList.css';
 
 class TaskList extends React.Component {
 
-    listItems = [{
-        taskName: "Get milk"
-    }, {
-        taskName: "Buy bread"
-    }, {
-        taskName: "Send mail"
-    }, {
-        taskName: "Pay fee"
-    }];
-
     handleCheck = (taskId) => {
-        // call a mutation to update the task status
+        console.log("Chekced");
     }
 
     render() {
 
-        const taskList = this.listItems.map((task) => {
-            return (
-                <div key={task.taskName}>
-                    <TaskListItem task={task} handleCheck={this.handleCheck} />
-                </div>
-            );
-        });
+        let taskList = [];
+
+        if (this.props.tasks) {
+            taskList = this.props.tasks.map((task) => {
+                return (
+                    <div key={task.__id}>
+                        <TaskListItem task={task} handleCheck={this.handleCheck}/>
+                    </div>
+                );
+            });
+        }
 
         return (
             <div>
@@ -45,7 +39,7 @@ class TaskList extends React.Component {
 const TaskListContainer = createFragmentContainer(
     TaskList,
     graphql`
-        fragment TaskList_tasks on task {
+        fragment TaskList_tasks on task @relay(plural: true){
             ...TaskListItem_task
         }
     `

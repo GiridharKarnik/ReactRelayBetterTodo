@@ -27,19 +27,15 @@ class App extends Component {
         variables={{}}
         render={({ error, props }) => {
           if (error) {
-            return <div>Error!</div>;
+            return <div>{error.message}</div>;
+          } else if (props) {
+            return (
+              <div className="App">
+                <TaskList tasks={props.tasks} />
+              </div>
+            );
           }
-          if (!props) {
-            return <div>Loading...</div>;
-          }
-          return (
-            <div className="App">
-              {/* <BrowserRouter>
-                <BaseComponent />
-              </BrowserRouter> */}
-              <TaskList />
-            </div>
-          )
+          return <div>Loading..</div>
         }}
       />
     );
